@@ -1,0 +1,28 @@
+#power-container {
+    width: 30px;
+    height: 300px;
+    border: 3px solid #333;
+    background: #fff;
+    margin: 20px auto;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(to top, red, yellow, green);
+
+}
+
+#power-bar {
+    width: 100%;              /* full width */
+    height: 0%;               /* starts empty */
+    position: absolute;
+    border: 5px solid #333;
+    bottom: 0;                /* grow upward */
+    transition: height 0.05s; /* animate vertically */
+}
+
+#bored{
+
+}
+#bored_fill{
+    
+}
