@@ -12,30 +12,48 @@ document.getElementById("reset_button").onclick = function () {
     location.reload();
 };
 
+document.getElementById("playerNameButton").onclick = function () {
+    player_Name = document.getElementById("playerName").value;
+
+    if (player_Name.trim() === "") {
+        alert("Enter a name first!");
+        return;
+    }
+
+    document.getElementById("playerNameInput").innerHTML = player_Name + ":";
+    document.getElementById("playerName").remove();
+    document.getElementById("playerNameButton").remove();
+
+    // ⭐ Start the countdown AFTER the name is entered
+    startFirstCountdown();
+};
+
 // Disable buttons at start
 document.getElementById("tapButton").disabled = true;
 document.getElementById("reset_button").disabled = true;
 
-// FIRST COUNTDOWN
-var Timecounter = 4;
-var interval1 = setInterval(function() {
-    Timecounter--;
+// FIRST COUNTDOWN (runs only after name is entered)
+function startFirstCountdown() {
+    var Timecounter = 4;
 
-    if (Timecounter <= -1) {
-        clearInterval(interval1);
+    var interval1 = setInterval(function() {
+        Timecounter--;
 
-        document.getElementById("time").innerHTML = "Go!";
-        document.getElementById("tapButton").disabled = false;
-        document.getElementById("reset_button").disabled = false;
+        if (Timecounter <= -1) {
+            clearInterval(interval1);
 
-        startSecondCountdown(); // <-- start next timer here
-        return;
-    } else {
-        document.getElementById("time").innerHTML = Timecounter + " Seconds";
-    }
-}, 1000);
+            document.getElementById("time").innerHTML = "Go!";
+            document.getElementById("tapButton").disabled = false;
+            document.getElementById("reset_button").disabled = false;
 
-// SECOND COUNTDOWN FUNCTION
+            startSecondCountdown();
+        } else {
+            document.getElementById("time").innerHTML = Timecounter + " Seconds";
+        }
+    }, 1000);
+}
+
+// SECOND COUNTDOWN
 function startSecondCountdown() {
     var TimecounterUp = 11;
 
@@ -48,25 +66,10 @@ function startSecondCountdown() {
             document.getElementById("time").innerHTML = "";
             document.getElementById("tapButton").disabled = true;
             num1 = parseInt(document.getElementById("output").innerHTML);
-            num2 = parseInt(document.getElementById("output2").innerHTML);
-            checkWinner()
-            return;
+            checkWinner();
         } else {
             document.getElementById("time").innerHTML = 
                 "You have " + TimecounterUp + " Seconds";
-            document.getElementById("output2").innerHTML = cUp++;
-
         }
     }, 1000);
-}
-
-
-function checkWinner() {
-    if (num1 > num2) {
-        document.getElementById("results").innerHTML = "Player 1 wins!";
-    } else if (num2 > num1) {
-        document.getElementById("results").innerHTML = "Player 2 wins!";
-    } else {
-        document.getElementById("results").innerHTML = "It's a draw! Try again.";
-    }
 }

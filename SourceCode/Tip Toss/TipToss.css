@@ -20,9 +20,25 @@
     transition: height 0.05s; /* animate vertically */
 }
 
-#bored{
-
+html, body {
+    height: 100%;           /* Ensures the gradient covers full page height */
+    margin: 0;              /* Removes default browser spacing */
+    padding: 0;
 }
-#bored_fill{
-    
+
+h1{
+      text-align: center;
+}
+
+p,  .myDiv  {
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+}
+
+
+body {
+    background-image: linear-gradient(#effbf6, #8ce3bf, #3dd092);
+    background-repeat: no-repeat;
+    background-attachment: fixed;  /* Optional: makes gradient stay fixed while scrolling */
 }

@@ -2,33 +2,51 @@ let power = 0;
 let increasing = true;
 let interval = null;
 
+// Disable start and reset until name is entered
+document.getElementById("starts").disabled = true;
+document.getElementById("reset_button").disabled = true;
+
+document.getElementById("playerNameButton").onclick = function () {
+    player_Name = document.getElementById("playerName").value;
+
+    if (player_Name.trim() === "") {
+        alert("Enter a name first!");
+        return;
+    }
+
+    document.getElementById("playerNameInput").innerHTML = player_Name + ":";
+    document.getElementById("playerName").remove();
+    document.getElementById("playerNameButton").remove();
+
+    // Enable start + reset AFTER name entered
+    document.getElementById("starts").disabled = false;
+    document.getElementById("reset_button").disabled = false;
+};
+
 const powerBar = document.getElementById("power-bar");
 const starts = document.getElementById("starts");
 const result = document.getElementById("result");
 document.getElementById("power-container").style.display = "none";
 
-
 document.getElementById("starts").onclick = function () {
     document.getElementById("starts").innerHTML = "toss";
     document.getElementById("power-container").style.display = "block";
 
-
     // Toss button stops the bar
     starts.onclick = () => {
-    clearInterval(interval);
+        clearInterval(interval);
 
-    if (power < 30) {
-        result.innerHTML = "Weak Toss!";
-    } else if (power < 70) {
-        result.innerHTML = "Nice Toss!";
-    } else {
-        result.innerHTML = "perfect Toss!";
-    }
+        if (power < 30) {
+            result.innerHTML = "Weak Toss!";
+        } else if (power < 70) {
+            result.innerHTML = "Nice Toss!";
+        } else {
+            result.innerHTML = "Perfect Toss!";
+        }
 
-    starts.disabled = true;
+        starts.disabled = true;
     };
 };
-
 
 // Start power bar animation
 interval = setInterval(() => {
@@ -42,7 +60,6 @@ interval = setInterval(() => {
 
     powerBar.style.height = power + "%";
 }, 30);
-
 
 document.getElementById("reset_button").onclick = function () {
     location.reload();
